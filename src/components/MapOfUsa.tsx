@@ -1,17 +1,17 @@
 import React, { Dispatch, useState } from 'react';
-import { Box, Container } from "@chakra-ui/react";
+import { Container } from "@chakra-ui/react";
 import {
     ComposableMap,
     Geographies,
-    Geography,
-    ZoomableGroup
+    Geography
 } from "react-simple-maps";
+import ReactTooltip from 'react-tooltip';
 
 import { IOpenAQAction, IOpenAQParameters } from '../reducers/OpenAQReducer';
 import { useLocations } from '../hooks/useLocations';
 import { V2LocationsResponse } from '../openapi/openaq';
 import { LocationMarker } from './LocationMarker';
-import ReactTooltip from 'react-tooltip';
+import { LocationMeasurements } from './LocationMeasurements';
 
 const geoUrl = "https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json";
 
@@ -20,34 +20,51 @@ interface MapOfUsaProps {
     dispatchOpenAQ: Dispatch<IOpenAQAction>;
 }
 
-function markLocations(locations: V2LocationsResponse[], setTooltip: React.Dispatch<React.SetStateAction<JSX.Element | string>>) {
-    const locationsWithCoordinates = locations.filter(x => !!x.coordinates);
-    return locationsWithCoordinates.map(x => <LocationMarker key={x.id} location={x} setTooltip={setTooltip} />);
-}
-
 export const MapOfUsa: React.FC<MapOfUsaProps> = ({ openAQParameters, dispatchOpenAQ }) => {
     const locations = useLocations(openAQParameters.locationsParameters);
     const [tooltip, setTooltip] = useState<JSX.Element | string>();
+    const [showMeasurements, setShowMeasurements] = useState(false);
+
     return <Container maxW="container.lg" border="1px" borderColor="teal" rounded="md">
         <ComposableMap data-tip="" projection="geoAlbersUsa" >
             <Geographies geography={geoUrl}>
                 {({ geographies }) => (
-                    <>
-                        {geographies.map(geo => (
-                            <Geography
-                                key={geo.rsmKey}
-                                stroke="#FFF"
-                                geography={geo}
-                                fill="#2D3748"
-                            />
-                        ))}
-                        {markLocations(locations, setTooltip)}
-                    </>
+                    <React.Fragment>
+                        {renderUsaStates(geographies)}
+                        {renderLocationMarkers(locations, dispatchOpenAQ, setTooltip, setShowMeasurements)}
+                    </React.Fragment>
                 )}
             </Geographies>
         </ComposableMap>
-        <ReactTooltip>
+        <ReactTooltip wrapper={null} backgroundColor="transparent">
             {tooltip}
         </ReactTooltip>
+        <LocationMeasurements openAQParameters={openAQParameters} show={showMeasurements} setShow={setShowMeasurements} />
     </Container>
+}
+
+
+function renderLocationMarkers(
+    locations: V2LocationsResponse[],
+    dispatchOpenAQ: Dispatch<IOpenAQAction>,
+    setTooltip: React.Dispatch<React.SetStateAction<JSX.Element | string>>,
+    setShowMeasurements: React.Dispatch<React.SetStateAction<boolean>>) {
+    const locationsWithCoordinates = locations.filter(x => !!x.coordinates);
+    return locationsWithCoordinates.map(x => <LocationMarker key={x.id}
+        location={x}
+        dispatchOpenAQ={dispatchOpenAQ}
+        setTooltip={setTooltip}
+        setShowMeasurements={setShowMeasurements}
+    />);
+}
+
+function renderUsaStates(geographies) {
+    return geographies.map(geo => (
+        <Geography
+            key={geo.rsmKey}
+            stroke="#FFF"
+            geography={geo}
+            fill="#2D3748"
+        />
+    ))
 }

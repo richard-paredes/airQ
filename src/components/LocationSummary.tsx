@@ -1,5 +1,5 @@
 import React from 'react';
-import { Badge, Box, Container, Divider, Heading, Text } from "@chakra-ui/react"
+import { Box, Container, Divider, Heading, Text } from "@chakra-ui/react"
 import { V2LocationsResponse } from '../openapi/openaq';
 import { EntityBadge } from './EntityBadge';
 import { SensorBadge } from './SensorBadge';
@@ -19,7 +19,7 @@ export const LocationSummary: React.FC<LocationSummaryProps> = ({ location }) =>
         <Text>Is Mobile: {location.isMobile?.toString()}</Text>
         <Text>Is Analysis: {location.isAnalysis?.toString()}</Text>
         <Box mx="auto" p="1" color="teal.300">
-            Click to learn more
+            Click marker to learn more
         </Box>
     </Container>
 }

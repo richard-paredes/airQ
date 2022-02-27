@@ -1,5 +1,6 @@
 import React from 'react';
 import { Badge } from '@chakra-ui/react';
+
 import { SensorTypes } from '../openapi/openaq';
 
 interface SensorBadgeProps {

@@ -1,5 +1,5 @@
 import React, { Dispatch } from 'react';
-import { Box, Button, Container, Flex, FormControl, FormErrorMessage, FormLabel, Input, Select } from '@chakra-ui/react';
+import { Button, Container, Flex, FormControl, FormErrorMessage, FormLabel, Input, Select } from '@chakra-ui/react';
 import { Field, Form, Formik } from 'formik';
 
 import { IOpenAQAction, IOpenAQParameters } from '../reducers/OpenAQReducer';

@@ -1,6 +1,8 @@
-import { Flex, Heading } from '@chakra-ui/react';
 import React from 'react';
+import { Flex, Heading } from '@chakra-ui/react';
+
 import { DarkModeSwitch } from './DarkModeSwitch';
+
 export const Navbar = () => {
     return <Flex
         w="full"
