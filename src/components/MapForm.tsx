@@ -60,14 +60,16 @@ export const MapForm: React.FC<MapFormProps> = ({ openAQParameters, dispatchOpen
                                     )}
                                 </Field>
                             </Flex>
-                            <Button
-                                mt={4}
-                                colorScheme='teal'
-                                isLoading={props.isSubmitting}
-                                type='submit'
-                            >
-                                Submit
-                            </Button>
+                            <Flex justify="center">
+                                <Button
+                                    mt={4}
+                                    colorScheme='teal'
+                                    isLoading={props.isSubmitting}
+                                    type='submit'
+                                >
+                                    Submit
+                                </Button>
+                            </Flex>
                         </Form>
                     </Flex>
                 )}
