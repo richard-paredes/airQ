@@ -21,12 +21,12 @@ export const initialOpenAQParameters: IOpenAQParameters = {
     selectedLocation: null
 }
 
-export const openAQReducer = (state: IOpenAQParameters, { type, values }: IOpenAQAction) => {
+export const openAQReducer = (state: IOpenAQParameters, { type, values }: IOpenAQAction): IOpenAQParameters => {
     switch (type) {
         case 'UPDATE_LOCATIONS_QUERY':
-            return { ...state, locationsParameters: { ...values } }
+            return { ...state, locationsParameters: { ...values as V2LocationsRequest } }
         case 'UPDATE_MEASUREMENTS_QUERY':
-            return { ...state, selectedLocation: { ...values } }
+            return { ...state, selectedLocation: { ...values as V2LocationsResponse } }
         default:
             return state;
     }
