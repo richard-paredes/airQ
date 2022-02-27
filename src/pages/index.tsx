@@ -5,6 +5,7 @@ import { MapOfUsa } from "../components/MapOfUsa";
 import { MapForm } from "../components/MapForm";
 import { Navbar } from "../components/Navbar";
 import { initialOpenAQParameters, openAQReducer } from "../reducers/OpenAQReducer";
+import { Footer } from "../components/Footer";
 
 const App = () => {
   const [openAQParameters, dispatchOpenAQ] = useReducer(openAQReducer, initialOpenAQParameters);
@@ -14,6 +15,7 @@ const App = () => {
       <Navbar />
       <MapForm openAQParameters={openAQParameters} dispatchOpenAQ={dispatchOpenAQ} />
       <MapOfUsa openAQParameters={openAQParameters} dispatchOpenAQ={dispatchOpenAQ} />
+      <Footer />
     </Layout>
   );
 };
