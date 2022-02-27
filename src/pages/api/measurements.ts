@@ -7,20 +7,16 @@ const measurementsHandler: NextApiHandler<V2MeasurementsResponse[]> = async (req
         res.status(404);
         return;
     }
-    try {
-        const measurementsParameters = { ...req.query };
+    
+    const measurementsParameters = { ...req.query };
 
-        if (!measurementsParameters || !measurementsParameters.locationId) {
-            res.status(200).json([]);
-            return;
-        }
-
-        const measurementsResponse = await V2Client.measurementsGetV2MeasurementsGet(measurementsParameters);
-        res.status(200).json(measurementsResponse.results ?? []);
-    } catch(err) {
-        console.log(err);
-        res.status(500).json([]);
+    if (!measurementsParameters || !measurementsParameters.locationId) {
+        res.status(200).json([]);
+        return;
     }
+
+    const measurementsResponse = await V2Client.measurementsGetV2MeasurementsGet(measurementsParameters);
+    res.status(200).json(measurementsResponse.results ?? []);
 }
 
 export default measurementsHandler;
