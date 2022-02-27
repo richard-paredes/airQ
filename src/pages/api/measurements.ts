@@ -17,7 +17,8 @@ const measurementsHandler: NextApiHandler<V2MeasurementsResponse[]> = async (req
 
         const measurementsResponse = await V2Client.measurementsGetV2MeasurementsGet(measurementsParameters);
         res.status(200).json(measurementsResponse.results ?? []);
-    } catch {
+    } catch(err) {
+        console.log(err);
         res.status(500).json([]);
     }
 }
