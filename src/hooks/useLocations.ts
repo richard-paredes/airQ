@@ -4,5 +4,5 @@ import { fetcher } from '../utilities/fetcher';
 
 export const useLocations = (request: V2LocationsRequest) => {
     const { data } = useSWR<V2LocationsResponse[]>({ url: "/api/locations", params: request }, fetcher);
-    return data;
+    return data || [];
 }

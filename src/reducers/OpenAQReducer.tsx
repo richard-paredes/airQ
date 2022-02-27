@@ -12,9 +12,10 @@ export interface IOpenAQParameters {
 
 export const initialOpenAQParameters: IOpenAQParameters = {
     locationsParameters: {
+        limit: 100,
+        hasGeo: true,
         countryId: 'US',
         entity: '',
-        city: ['Houston']
     },
     measurementsParameters: {
 
