@@ -16,6 +16,7 @@ export const initialOpenAQParameters: IOpenAQParameters = {
         hasGeo: true,
         countryId: 'US',
         entity: '',
+        sensorType: ''
     },
     measurementsParameters: {
 
@@ -25,9 +26,9 @@ export const initialOpenAQParameters: IOpenAQParameters = {
 export const openAQReducer = (state: IOpenAQParameters, { type, values }: IOpenAQAction) => {
     switch (type) {
         case 'UPDATE_LOCATIONS_QUERY':
-            return { ...state, ...values }
+            return { ...state, locationsParameters: { ...values } }
         case 'UPDATE_MEASUREMENTS_QUERY':
-            return { ...state, ...values }
+            return { ...state, measurementsParameters: { ...values } }
         default:
             return state;
     }

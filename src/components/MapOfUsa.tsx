@@ -28,25 +28,23 @@ function markLocations(locations: V2LocationsResponse[], setTooltip: React.Dispa
 export const MapOfUsa: React.FC<MapOfUsaProps> = ({ openAQParameters, dispatchOpenAQ }) => {
     const locations = useLocations(openAQParameters.locationsParameters);
     const [tooltip, setTooltip] = useState<JSX.Element | string>();
-    return <Container maxW="container.lg">
+    return <Container maxW="container.lg" border="1px" borderColor="teal" rounded="md">
         <ComposableMap data-tip="" projection="geoAlbersUsa" >
-            <ZoomableGroup>
-                <Geographies geography={geoUrl}>
-                    {({ geographies }) => (
-                        <>
-                            {geographies.map(geo => (
-                                <Geography
-                                    key={geo.rsmKey}
-                                    stroke="#FFF"
-                                    geography={geo}
-                                    fill="#CDCDCD"
-                                />
-                            ))}
-                            {markLocations(locations, setTooltip)}
-                        </>
-                    )}
-                </Geographies>
-            </ZoomableGroup>
+            <Geographies geography={geoUrl}>
+                {({ geographies }) => (
+                    <>
+                        {geographies.map(geo => (
+                            <Geography
+                                key={geo.rsmKey}
+                                stroke="#FFF"
+                                geography={geo}
+                                fill="#2D3748"
+                            />
+                        ))}
+                        {markLocations(locations, setTooltip)}
+                    </>
+                )}
+            </Geographies>
         </ComposableMap>
         <ReactTooltip>
             {tooltip}
