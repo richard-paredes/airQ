@@ -3,6 +3,7 @@ import { Field, Form, Formik } from 'formik';
 import React from 'react';
 
 export const MapForm = () => {
+
     function validateName(value) {
         let error
         if (!value) {
@@ -14,7 +15,7 @@ export const MapForm = () => {
     }
 
     return (
-        <Container maxW="container.sm" p="4">
+        <Container maxW="container.md" p="4" my="2">
             <Formik
                 initialValues={{ name: 'Sasuke' }}
                 onSubmit={(values, actions) => {

@@ -27,7 +27,7 @@ const offsets = {
 };
 
 export const MapOfUsa = () => {
-    return <Container maxW="container.xl">
+    return <Container maxW="container.lg">
         <ComposableMap projection="geoAlbersUsa">
             <Geographies geography={geoUrl}>
                 {({ geographies }) => (
