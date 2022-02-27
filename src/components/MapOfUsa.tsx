@@ -10,9 +10,8 @@ import {
 import { geoCentroid } from 'd3-geo'
 
 import allStates from "../data/allstates.json";
-import { IOpenAQAction, IOpenAQParameters } from '../contexts/OpenAQReducer';
+import { IOpenAQAction, IOpenAQParameters } from '../reducers/OpenAQReducer';
 import { useLocations } from '../hooks/useLocations';
-
 
 const geoUrl = "https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json";
 
@@ -33,7 +32,6 @@ interface MapOfUsaProps {
     openAQParameters: IOpenAQParameters;
     dispatchOpenAQ: Dispatch<IOpenAQAction>;
 }
-
 
 export const MapOfUsa: React.FC<MapOfUsaProps> = ({ openAQParameters, dispatchOpenAQ }) => {
     const locations = useLocations(openAQParameters.locationsParameters);

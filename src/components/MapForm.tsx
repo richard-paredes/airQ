@@ -2,7 +2,7 @@ import React, { Dispatch } from 'react';
 import { Button, Container, FormControl, FormErrorMessage, FormLabel, Input, Select } from '@chakra-ui/react';
 import { Field, Form, Formik } from 'formik';
 
-import { IOpenAQAction, IOpenAQParameters } from '../contexts/OpenAQReducer';
+import { IOpenAQAction, IOpenAQParameters } from '../reducers/OpenAQReducer';
 
 interface MapFormProps {
     openAQParameters: IOpenAQParameters;

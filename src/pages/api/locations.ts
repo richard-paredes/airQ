@@ -12,7 +12,6 @@ const locationsHandler: NextApiHandler<V2LocationsResponse[]> = async (req, res)
         const locationsResponse = await V2Client.locationsGetV2LocationsGet(locationsParameters);
         res.status(200).json(locationsResponse.results ?? []);
     } catch(err) {
-        console.log(err);
         res.status(500).json([]);
     }
 }
