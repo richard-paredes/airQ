@@ -10,7 +10,7 @@ const measurementsHandler: NextApiHandler<V2MeasurementsResponse[]> = async (req
     try {
         const measurementsParameters = { ...req.query };
 
-        if (!measurementsParameters && !measurementsParameters.locationId) {
+        if (!measurementsParameters || !measurementsParameters.locationId) {
             res.status(200).json([]);
             return;
         }
