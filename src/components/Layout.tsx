@@ -1,6 +1,6 @@
 import { Flex, useColorMode, FlexProps } from '@chakra-ui/react'
 
-export const Container = (props: FlexProps) => {
+export const Layout = (props: FlexProps) => {
   const { colorMode } = useColorMode()
 
   const bgColor = { light: 'gray.50', dark: 'gray.900' }
@@ -11,6 +11,7 @@ export const Container = (props: FlexProps) => {
       direction="column"
       alignItems="center"
       justifyContent="flex-start"
+      overflow="auto"
       bg={bgColor[colorMode]}
       color={color[colorMode]}
       {...props}

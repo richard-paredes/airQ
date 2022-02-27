@@ -1,9 +1,9 @@
 import { Link as ChakraLink, Button } from '@chakra-ui/react'
 
-import { Container } from './Container'
+import { Layout } from './Layout'
 
 export const CTA = () => (
-  <Container
+  <Layout
     flexDirection="row"
     position="fixed"
     bottom="0"
@@ -27,5 +27,5 @@ export const CTA = () => (
         View Repo
       </Button>
     </ChakraLink>
-  </Container>
+  </Layout>
 )
