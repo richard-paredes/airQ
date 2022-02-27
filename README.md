@@ -1,9 +1,5 @@
 # AirQ
 
-## Preview
-
-Preview the example live on [Vercel](http://stackblitz.com/):
-
 ## How to run locally
 
 Clone this repository.
