@@ -1,5 +1,5 @@
 import React from 'react';
-import { Flex } from "@chakra-ui/react";
+import { Container, Flex } from "@chakra-ui/react";
 import {
     ComposableMap,
     Geographies,
@@ -27,7 +27,7 @@ const offsets = {
 };
 
 export const MapOfUsa = () => {
-    return <Flex justify="center" align="center" maxH="50vh" maxW="50vw">
+    return <Container maxW="container.xl">
         <ComposableMap projection="geoAlbersUsa">
             <Geographies geography={geoUrl}>
                 {({ geographies }) => (
@@ -72,5 +72,5 @@ export const MapOfUsa = () => {
                 )}
             </Geographies>
         </ComposableMap>
-    </Flex>
+    </Container>
 }

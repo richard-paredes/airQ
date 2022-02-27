@@ -9,8 +9,8 @@ export const Layout = (props: FlexProps) => {
   return (
     <Flex
       direction="column"
-      alignItems="center"
-      justifyContent="flex-start"
+      align="center"
+      justify="flex-start"
       overflow="auto"
       bg={bgColor[colorMode]}
       color={color[colorMode]}

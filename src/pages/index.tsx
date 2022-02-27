@@ -2,14 +2,17 @@ import React from "react";
 import { Flex } from "@chakra-ui/react";
 
 import { Layout } from "../components/Layout";
+import { MapOfUsa } from "../components/MapOfUsa";
+import { MapForm } from "../components/MapForm";
+import { Navbar } from "../components/Navbar";
 
 const App = () => {
 
   return (
-    <Layout minH="100vh">
-      <Flex justify="center" align="center" minH="40vh" minW="40vw">
-        Hello world
-      </Flex>
+    <Layout minH="100vh" maxH="100vh">
+      <Navbar />
+      <MapForm />
+      <MapOfUsa />
     </Layout>
   );
 };
