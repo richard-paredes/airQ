@@ -34,6 +34,8 @@ export type { TileJSON } from './models/TileJSON';
 export type { ValidationError } from './models/ValidationError';
 export type { V2LocationsRequest } from './models/V2LocationsRequest';
 export type { V2MeasurementsRequest } from './models/V2MeasurementsRequest';
+export type { V2LocationsResponse } from './models/V2LocationsResponse';
+export type { V2MeasurementsResponse } from './models/V2MeasurementsResponse';
 
 export { DefaultClient } from './services/DefaultClient';
 export { V1Client } from './services/V1Client';
