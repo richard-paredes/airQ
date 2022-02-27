@@ -1,5 +1,5 @@
-import React from 'react';
-import { Container, Flex } from "@chakra-ui/react";
+import React, { Dispatch } from 'react';
+import { Container } from "@chakra-ui/react";
 import {
     ComposableMap,
     Geographies,
@@ -10,6 +10,8 @@ import {
 import { geoCentroid } from 'd3-geo'
 
 import allStates from "../data/allstates.json";
+import { IOpenAQAction, IOpenAQParameters } from '../contexts/OpenAQReducer';
+import { useLocations } from '../hooks/useLocations';
 
 
 const geoUrl = "https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json";
@@ -26,7 +28,16 @@ const offsets = {
     DC: [49, 21]
 };
 
-export const MapOfUsa = () => {
+
+interface MapOfUsaProps {
+    openAQParameters: IOpenAQParameters;
+    dispatchOpenAQ: Dispatch<IOpenAQAction>;
+}
+
+
+export const MapOfUsa: React.FC<MapOfUsaProps> = ({ openAQParameters, dispatchOpenAQ }) => {
+    const locations = useLocations(openAQParameters.locationsParameters);
+    
     return <Container maxW="container.lg">
         <ComposableMap projection="geoAlbersUsa">
             <Geographies geography={geoUrl}>

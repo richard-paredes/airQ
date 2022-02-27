@@ -1,18 +1,19 @@
-import React, { useReducer, useState } from "react";
+import React, { useReducer } from "react";
 
 import { Layout } from "../components/Layout";
 import { MapOfUsa } from "../components/MapOfUsa";
 import { MapForm } from "../components/MapForm";
 import { Navbar } from "../components/Navbar";
+import { initialOpenAQParameters, openAQReducer } from "../contexts/OpenAQReducer";
 
 const App = () => {
-  const [openAQState, dispatch] = useReducer();
-  
+  const [openAQParameters, dispatchOpenAQ] = useReducer(openAQReducer, initialOpenAQParameters);
+
   return (
     <Layout minH="100vh" maxH="100vh">
       <Navbar />
-      <MapForm />
-      <MapOfUsa />
+      <MapForm openAQParameters={openAQParameters} dispatchOpenAQ={dispatchOpenAQ} />
+      <MapOfUsa openAQParameters={openAQParameters} dispatchOpenAQ={dispatchOpenAQ} />
     </Layout>
   );
 };

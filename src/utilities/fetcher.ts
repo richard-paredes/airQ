@@ -1,7 +1,8 @@
-export const fetcher = async <T>(
-    input: RequestInfo,
-    init?: RequestInit
-): Promise<T> => {
-    const res = await fetch(input, init)
-    return res.json()
+export const fetcher = async <T>({
+    url,
+    params
+}: { url: string, params: Record<string, any> }): Promise<T> => {
+    const refinedParams = Object.fromEntries(Object.entries(params).filter(([_, v]) => v !== ''));
+    const response = await fetch(`${url}?${new URLSearchParams(refinedParams)}`);
+    return response.json();
 }

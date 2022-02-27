@@ -19,7 +19,7 @@ export type OpenAPIConfig = {
 };
 
 export const OpenAPI: OpenAPIConfig = {
-    BASE: '',
+    BASE: 'https://u50g7n0cbj.execute-api.us-east-1.amazonaws.com',
     VERSION: '2.0.0',
     WITH_CREDENTIALS: false,
     CREDENTIALS: 'include',

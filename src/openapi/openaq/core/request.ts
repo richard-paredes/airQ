@@ -212,7 +212,7 @@ export const sendRequest = async (
     }
 
     onCancel(() => controller.abort());
-
+    console.log(url);
     return await fetch(url, request);
 };
 

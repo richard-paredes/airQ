@@ -1,38 +1,46 @@
-import { Button, Container, FormControl, FormErrorMessage, FormLabel, Input } from '@chakra-ui/react';
+import React, { Dispatch } from 'react';
+import { Button, Container, FormControl, FormErrorMessage, FormLabel, Input, Select } from '@chakra-ui/react';
 import { Field, Form, Formik } from 'formik';
-import React from 'react';
 
-export const MapForm = () => {
+import { IOpenAQAction, IOpenAQParameters } from '../contexts/OpenAQReducer';
 
-    function validateName(value) {
-        let error
-        if (!value) {
-            error = 'Name is required'
-        } else if (value.toLowerCase() !== 'naruto') {
-            error = "Jeez! You're not a fan 😱"
-        }
-        return error
-    }
+interface MapFormProps {
+    openAQParameters: IOpenAQParameters;
+    dispatchOpenAQ: Dispatch<IOpenAQAction>;
+}
 
+export const MapForm: React.FC<MapFormProps> = ({ openAQParameters, dispatchOpenAQ }) => {
     return (
         <Container maxW="container.md" p="4" my="2">
             <Formik
-                initialValues={{ name: 'Sasuke' }}
+                initialValues={openAQParameters.locationsParameters}
                 onSubmit={(values, actions) => {
-                    setTimeout(() => {
-                        alert(JSON.stringify(values, null, 2))
-                        actions.setSubmitting(false)
-                    }, 1000)
+                    dispatchOpenAQ({ type: 'UPDATE_LOCATIONS_QUERY', values });
+                    setTimeout(() => actions.setSubmitting(false), 500);
                 }}
             >
                 {(props) => (
                     <Form>
-                        <Field name='name' validate={validateName}>
+                        <Field name='countryId'>
                             {({ field, form }) => (
-                                <FormControl isInvalid={form.errors.name && form.touched.name}>
-                                    <FormLabel htmlFor='name'>First name</FormLabel>
-                                    <Input {...field} id='name' placeholder='name' />
-                                    <FormErrorMessage>{form.errors.name}</FormErrorMessage>
+                                <FormControl isInvalid={form.errors.countryId && form.touched.countryId} isReadOnly isDisabled my={2}>
+                                    <FormLabel htmlFor='countryId'>Country ID</FormLabel>
+                                    <Input {...field} id='countryId' placeholder='countryId' />
+                                    <FormErrorMessage>{form.errors.entity}</FormErrorMessage>
+                                </FormControl>
+                            )}
+                        </Field>
+                        <Field name='entity'>
+                            {({ field, form }) => (
+                                <FormControl isInvalid={form.errors.entity && form.touched.entity} my={2}>
+                                    <FormLabel htmlFor='entity'>Entity</FormLabel>
+                                    <Select {...field}>
+                                        <option value=''>All</option>
+                                        <option value='community'>Community</option>
+                                        <option value='government'>Government</option>
+                                        <option value='research'>Research</option>
+                                    </Select>
+                                    <FormErrorMessage>{form.errors.entity}</FormErrorMessage>
                                 </FormControl>
                             )}
                         </Field>
