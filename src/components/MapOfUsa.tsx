@@ -1,6 +1,7 @@
 import React, { Dispatch, useState } from 'react';
 import { Container } from "@chakra-ui/react";
 import {
+    ZoomableGroup,
     ComposableMap,
     Geographies,
     Geography
@@ -13,8 +14,9 @@ import { V2LocationsResponse } from '../openapi/openaq';
 import { LocationMarker } from './LocationMarker';
 import { LocationMeasurements } from './LocationMeasurements';
 
-const geoUrl = "https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json";
-
+// const geoUrl = "https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json";
+// const geoUrl = "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
+const geoUrl = "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
 interface MapOfUsaProps {
     openAQParameters: IOpenAQParameters;
     dispatchOpenAQ: Dispatch<IOpenAQAction>;
@@ -26,15 +28,17 @@ export const MapOfUsa: React.FC<MapOfUsaProps> = ({ openAQParameters, dispatchOp
     const [showMeasurements, setShowMeasurements] = useState(false);
 
     return <Container maxW="container.lg" border="1px" borderColor="teal" rounded="md">
-        <ComposableMap data-tip="" projection="geoAlbersUsa" >
-            <Geographies geography={geoUrl}>
-                {({ geographies }) => (
-                    <React.Fragment>
-                        {renderUsaStates(geographies)}
-                        {renderLocationMarkers(locations, dispatchOpenAQ, setTooltip, setShowMeasurements)}
-                    </React.Fragment>
-                )}
-            </Geographies>
+        <ComposableMap data-tip="" projection="geoAlbers" projectionConfig={{scale: 500}}>
+            <ZoomableGroup zoom={1}>
+                <Geographies geography={geoUrl}>
+                    {({ geographies }) => (
+                        <React.Fragment>
+                            {renderUsaStates(geographies)}
+                            {renderLocationMarkers(locations, dispatchOpenAQ, setTooltip, setShowMeasurements)}
+                        </React.Fragment>
+                    )}
+                </Geographies>
+            </ZoomableGroup>
         </ComposableMap>
         <ReactTooltip wrapper={null} backgroundColor="transparent">
             {tooltip}
