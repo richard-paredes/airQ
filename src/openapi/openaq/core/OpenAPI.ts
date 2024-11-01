@@ -19,13 +19,15 @@ export type OpenAPIConfig = {
 };
 
 export const OpenAPI: OpenAPIConfig = {
-    BASE: 'https://u50g7n0cbj.execute-api.us-east-1.amazonaws.com',
+    BASE: process.env.OPENAQ_API_BASE_URL,
     VERSION: '2.0.0',
     WITH_CREDENTIALS: false,
     CREDENTIALS: 'include',
     TOKEN: undefined,
     USERNAME: undefined,
     PASSWORD: undefined,
-    HEADERS: undefined,
+    HEADERS: {
+        'X-API-Key': process.env.OPENAQ_API_TOKEN
+    },
     ENCODE_PATH: undefined,
 };

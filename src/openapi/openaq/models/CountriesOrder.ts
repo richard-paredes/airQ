@@ -2,7 +2,4 @@
 /* tslint:disable */
 /* eslint-disable */
 
-/**
- * An enumeration.
- */
-export type CountriesOrder = 'country' | 'firstUpdated' | 'lastUpdated' | 'locations' | 'count';
+export type CountriesOrder = 'code' | 'name' | 'locations' | 'firstUpdated' | 'lastUpdated' | 'parameters' | 'count' | 'cities' | 'sources';

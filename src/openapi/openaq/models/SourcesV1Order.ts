@@ -2,7 +2,4 @@
 /* tslint:disable */
 /* eslint-disable */
 
-/**
- * An enumeration.
- */
-export type SourcesV1Order = 'name';
+export type SourcesV1Order = string;

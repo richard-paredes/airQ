@@ -1,14 +1,14 @@
 import useSWR from 'swr';
-import { V2LocationsResponse, V2MeasurementsResponse } from '../openapi/openaq';
+import { V3Client, Measurement } from '../openapi/openaq';
 import { fetcher } from '../utilities/fetcher';
 
-export const useMeasurements = (request: V2LocationsResponse) => {
-    const { data } = useSWR<V2MeasurementsResponse[]>({
+
+export type MeasurementRequest = Parameters<typeof V3Client.sensorHourlyMeasurementsGetV3SensorsSensorsIdHoursGet>[0];
+
+export const useMeasurements = (request: MeasurementRequest) => {
+    const { data } = useSWR<Measurement[]>({
         url: "/api/measurements",
-        params: {
-            locationId: request?.id,
-            unit: ["µg/m³"]
-        }
+        params: request
     }, fetcher);
     return data || [];
 }

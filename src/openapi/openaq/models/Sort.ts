@@ -2,7 +2,4 @@
 /* tslint:disable */
 /* eslint-disable */
 
-/**
- * An enumeration.
- */
 export type Sort = 'asc' | 'desc';

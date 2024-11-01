@@ -1,7 +1,7 @@
 import { NextApiHandler } from "next";
-import { V2Client, V2LocationsResponse } from "../../openapi/openaq";
+import { V3Client, Location } from "../../openapi/openaq";
 
-const locationsHandler: NextApiHandler<V2LocationsResponse[]> = async (req, res) => {
+const locationsHandler: NextApiHandler<Location[]> = async (req, res) => {
     if (req.method !== "GET") {
         res.status(404);
         return;
@@ -9,9 +9,9 @@ const locationsHandler: NextApiHandler<V2LocationsResponse[]> = async (req, res)
 
     try {
         const locationsParameters = { ...req.query };
-        const locationsResponse = await V2Client.locationsGetV2LocationsGet(locationsParameters);
+        const locationsResponse = await V3Client.locationsGetV3LocationsGet(locationsParameters);
         res.status(200).json(locationsResponse.results ?? []);
-    } catch(err) {
+    } catch (err) {
         res.status(500).json([]);
     }
 }

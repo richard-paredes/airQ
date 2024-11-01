@@ -1,13 +1,13 @@
 import { NextApiHandler } from "next";
-import { V2Client, V2MeasurementsResponse } from "../../openapi/openaq";
+import { V3Client, Measurement } from "../../openapi/openaq";
 
 
-const measurementsHandler: NextApiHandler<V2MeasurementsResponse[]> = async (req, res) => {
+const measurementsHandler: NextApiHandler<Measurement[]> = async (req, res) => {
     if (req.method !== "GET") {
         res.status(404);
         return;
     }
-    
+
     const measurementsParameters = { ...req.query };
 
     if (!measurementsParameters || !measurementsParameters.locationId) {
@@ -15,8 +15,10 @@ const measurementsHandler: NextApiHandler<V2MeasurementsResponse[]> = async (req
         return;
     }
 
-    const measurementsResponse = await V2Client.measurementsGetV2MeasurementsGet(measurementsParameters);
-    res.status(200).json(measurementsResponse.results ?? []);
+    // const measurementsResponse = await V3Client.sensorMeasurementsAggregatedGetDailyV3SensorsSensorsIdMeasurementsDailyGet(measurementsParameters);
+    // res.status(200).json(measurementsResponse.results ?? []);
+    res.status(404).json([]);
+    return;
 }
 
 export default measurementsHandler;

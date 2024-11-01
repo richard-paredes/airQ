@@ -1,20 +1,24 @@
-import React, { useReducer } from "react";
+import React, { useMemo } from "react";
 
 import { Layout } from "../components/Layout";
-import { MapOfUsa } from "../components/MapOfUsa";
-import { MapForm } from "../components/MapForm";
 import { Navbar } from "../components/Navbar";
-import { initialOpenAQParameters, openAQReducer } from "../reducers/OpenAQReducer";
 import { Footer } from "../components/Footer";
+import dynamic from "next/dynamic";
+import { About } from "@/components/About";
 
 const App = () => {
-  const [openAQParameters, dispatchOpenAQ] = useReducer(openAQReducer, initialOpenAQParameters);
-
+  const WorldMap = useMemo(() => dynamic(
+    () => import('@/components/WorldMap'),
+    {
+      loading: () => <p>A map is loading</p>,
+      ssr: false
+    }
+  ), [])
   return (
     <Layout minH="100vh" maxH="100vh">
       <Navbar />
-      <MapForm openAQParameters={openAQParameters} dispatchOpenAQ={dispatchOpenAQ} />
-      <MapOfUsa openAQParameters={openAQParameters} dispatchOpenAQ={dispatchOpenAQ} />
+      <WorldMap />
+      <About />
       <Footer />
     </Layout>
   );

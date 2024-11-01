@@ -5,9 +5,7 @@
 export type ParametersRow = {
     id: number;
     name: string;
-    displayName: string;
+    displayName?: (string | null);
     description: string;
     preferredUnit: string;
-    isCore?: boolean;
-    maxColorValue?: number;
 };

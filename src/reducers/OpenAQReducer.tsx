@@ -1,13 +1,14 @@
-import { V2LocationsRequest, V2LocationsResponse, V2MeasurementsRequest } from "../openapi/openaq";
+import { LocationsRequest } from "../hooks/useLocations";
+import { Location } from "../openapi/openaq";
 
 export interface IOpenAQAction {
     type: 'UPDATE_LOCATIONS_QUERY' | 'UPDATE_MEASUREMENTS_QUERY';
-    values: V2LocationsRequest | V2LocationsResponse;
+    values: LocationsRequest | Location[];
 }
 
 export interface IOpenAQParameters {
-    locationsParameters: V2LocationsRequest;
-    selectedLocation?: V2LocationsResponse;
+    locationsParameters: any;
+    selectedLocation?: any;
 }
 
 export const initialOpenAQParameters: IOpenAQParameters = {
@@ -24,9 +25,12 @@ export const initialOpenAQParameters: IOpenAQParameters = {
 export const openAQReducer = (state: IOpenAQParameters, { type, values }: IOpenAQAction): IOpenAQParameters => {
     switch (type) {
         case 'UPDATE_LOCATIONS_QUERY':
-            return { ...state, locationsParameters: { ...values as V2LocationsRequest } }
+            return { ...state, locationsParameters: { ...values as LocationsRequest } }
         case 'UPDATE_MEASUREMENTS_QUERY':
-            return { ...state, selectedLocation: { ...values as V2LocationsResponse } }
+            return {
+                ...state,
+                selectedLocation: { ...values as any }
+            }
         default:
             return state;
     }
