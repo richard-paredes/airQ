@@ -5,6 +5,7 @@ import { Navbar } from "../components/Navbar";
 import { Footer } from "../components/Footer";
 import dynamic from "next/dynamic";
 import { About } from "@/components/About";
+import { Center, Box, Heading, Text } from "@chakra-ui/react";
 
 const App = () => {
   const WorldMap = useMemo(() => dynamic(

@@ -9,7 +9,6 @@ const sensorsHandler: NextApiHandler<Sensor[]> = async (req, res) => {
     }
 
     const sensorsParams = { ...req.query };
-    console.log(sensorsParams);
     if (!sensorsParams || !sensorsParams.locationsId || typeof sensorsParams.locationsId !== "string") {
         res.status(200).json([]);
         return;
